@@ -6,7 +6,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-HISTFILE="$HOME/.zhistory"
+HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
 
@@ -21,11 +21,9 @@ setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
 setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
-setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
 # Aliases
 
 # Lists the ten most used commands.
 alias history-stat="history . | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
-

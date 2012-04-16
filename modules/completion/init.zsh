@@ -17,18 +17,19 @@ autoload -Uz compinit && compinit -i
 setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
 setopt ALWAYS_TO_END       # Move cursor to the end of a completed word.
 setopt PATH_DIRS           # Perform path search even on command names with slashes.
-setopt AUTO_MENU           # Show completion menu on a succesive tab press.
-setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
 setopt AUTO_PARAM_SLASH    # If completed parameter is a directory, add a trailing slash.
+setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
+unsetopt AUTO_MENU         # Show completion menu on a succesive tab press.
 unsetopt MENU_COMPLETE     # Do not autoselect the first completion entry.
 unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
+unsetopt AUTO_REMOVE_SLASH # Don't remove slashes at the end of directory completions.
 
 # Treat these characters as part of a word.
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
 
 # Use caching to make completion for cammands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "$HOME/.zcache"
+zstyle ':completion::complete:*' cache-path "$OMZ/cache"
 
 # Case-insensitive (all), partial-word, and then substring completion.
 if zstyle -t ':omz:completion:*' case-sensitive; then
@@ -138,4 +139,10 @@ zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipa
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*.*' loopback localhost
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-domain' ignored-patterns '<->.<->.<->.<->' '^*.*' '*@*'
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^<->.<->.<->.<->' '127.0.0.<->'
+
+# Highlight prefixes during completion.
+highlights='${PREFIX:+=(#bi)($PREFIX:t)(?)*==31=1;32}':${(s.:.)LS_COLORS}}
+highlights2='=(#bi) #([0-9]#) #([^ ]#) #([^ ]#) ##*($PREFIX)*==1;31=1;35=1;33=1;32=}'
+zstyle -e ':completion:*' list-colors 'if [[ $words[1] != kill && $words[1] != strace ]]; then reply=( "'$highlights'" ); else reply=( "'$highlights2'" ); fi'
+unset highlights
 

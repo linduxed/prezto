@@ -1,0 +1,4 @@
+#
+#  ALIAS
+#
+alias dotfiles-update='rsync-azcp -Lk linduxed@freke.linduxed.se:dotfiles/ ~ --exclude ".vim/view/"'

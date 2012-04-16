@@ -16,8 +16,8 @@ if is-callable 'dircolors'; then
   alias ls='ls --group-directories-first'
 
   if zstyle -t ':omz:alias:ls' color; then
-    if [[ -f "$HOME/.dir_colors" ]]; then
-      eval "$(dircolors "$HOME/.dir_colors")"
+    if [[ -f "$OMZ/dircolors" ]]; then
+      eval "$(dircolors "$OMZ/dircolors")"
     else
       eval "$(dircolors)"
     fi
@@ -68,9 +68,17 @@ alias p='${(z)PAGER}'
 alias po='popd'
 alias pu='pushd'
 alias rake='noglob rake'
-alias rm='nocorrect rm -i'
+alias rm='nocorrect rm'
 alias scp='nocorrect scp'
 alias type='type -a'
+
+alias mc='mc -u'
+alias pull-all='find . -name ".git"  -type d -prune -execdir git pull \;'
+alias unzip-all='for a in *.zip; do mkdir $a:r; pushd $a:r; unzip ../$a; popd; done'
+alias pb='wgetpaste -X'
+
+# Server logins
+alias freke='ssh -R 8081:localhost:22 linduxed@freke.linduxed.se'
 
 # Mac OS X
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -79,6 +87,8 @@ if [[ "$OSTYPE" == darwin* ]]; then
 else
   alias o='xdg-open'
   alias get='wget --continue --progress=bar'
+  alias pbc='pbcopy'
+  alias pbp='pbpaste'
 
   if (( $+commands[xclip] )); then
     alias pbcopy='xclip -selection clipboard -in'
@@ -90,9 +100,6 @@ else
     alias pbpaste='xsel --clipboard --output'
   fi
 fi
-
-alias pbc='pbcopy'
-alias pbp='pbpaste'
 
 # Top
 if (( $+commands[htop] )); then
