@@ -90,6 +90,12 @@ alias lc='lt -c'         # Lists sorted by date, most recent last, shows change 
 alias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.
 alias sl='ls'            # I often screw this up.
 
+alias mc='mc -u'
+alias pull-all='find . -name ".git"  -type d -prune -execdir git pull \;'
+alias unzip-all='for a in *.zip; do mkdir $a:r; pushd $a:r; unzip ../$a; popd; done'
+alias pb='wgetpaste -X'
+alias freke='ssh -R 8081:localhost:22 linduxed@freke.linduxed.se'
+
 # Mac OS X Everywhere
 if [[ "$OSTYPE" == darwin* ]]; then
   alias o='open'
@@ -112,9 +118,17 @@ fi
 alias pbc='pbcopy'
 alias pbp='pbpaste'
 
-# Resource Usage
-alias df='df -kh'
-alias du='du -kh'
+# Coloured versions of commands (if available)
+if is-callable 'dfc'; then
+  alias df='dfc'
+else
+  alias df='df -kh'
+fi
+if is-callable 'cdu'; then
+  alias du='cdu -idh'
+else
+  alias du='du -kh'
+fi
 
 if (( $+commands[htop] )); then
   alias top=htop
