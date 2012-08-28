@@ -6,13 +6,20 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Dumb terminals lack support.
+# Return if requirements are not found.
 if [[ "$TERM" == 'dumb' ]]; then
   return 1
 fi
 
+# Add zsh-completions to $fpath.
+fpath=("${0:h}/external/src" $fpath)
+
 # Load and initialize the completion system ignoring insecure directories.
 autoload -Uz compinit && compinit -i
+
+#
+# Options
+#
 
 setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
 setopt ALWAYS_TO_END       # Move cursor to the end of a completed word.
@@ -26,6 +33,10 @@ unsetopt AUTO_REMOVE_SLASH # Don't remove slashes at the end of directory comple
 
 # Treat these characters as part of a word.
 WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
+
+#
+# Styles
+#
 
 # Use caching to make completion for cammands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on

@@ -5,7 +5,15 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Return if requirements are not found.
+if (( ! $+commands[rsync] )); then
+  return 1
+fi
+
+#
 # Aliases
+#
+
 _rsync_cmd='rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system'
 
 # Mac OS X and HFS+ Enhancements

@@ -13,12 +13,12 @@ version is 4.3.10.
 
   1. Clone the repository:
 
-        git clone --recursive https://github.com/sorin-ionescu/oh-my-zsh.git ~/.oh-my-zsh
+        git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.prezto
 
   2. Create a new Zsh configuration by copying the Zsh configuration file
-     templates provided:
+     runcoms provided:
 
-        for rcfile in ~/.oh-my-zsh/templates/z{shenv,shrc,login,logout}; do
+        for rcfile in ~/.prezto/runcoms/z{shenv,shrc,login,logout}; do
           cp -f $rcfile ~/.$rcfile:t
         done
 
@@ -81,15 +81,10 @@ The project is managed via [Git][3]. It is highly recommend that you commit
 your changes and push them to [GitHub][4] to not lose them. If you do not know
 how to use Git, follow this [tutorial][5] and bookmark this [reference][6].
 
-### Completions
-
-Submit program completions to the [zsh-completions][7] project. The Oh My Zsh
-completions directory will be synchronized against it.
-
 Resources
 ---------
 
-The [Zsh Reference Card][8] is indispensable.
+The [Zsh Reference Card][7] and the [zsh-lovers][8] man page are indispensable.
 
 Contribute
 ----------
@@ -159,8 +154,8 @@ SOFTWARE.
 [4]: https://github.com
 [5]: http://gitimmersion.com
 [6]: http://gitref.org
-[7]: https://github.com/zsh-users/zsh-completions
-[8]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
+[7]: http://www.bash2zsh.com/zsh_refcard/refcard.pdf
+[8]: http://grml.org/zsh/zsh-lovers.html
 [9]: https://github.com/sorin-ionescu/oh-my-zsh/contributors
 [10]: http://gun.io/blog/how-to-github-fork-branch-and-pull-request
 [11]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html

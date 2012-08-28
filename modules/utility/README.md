@@ -47,15 +47,18 @@ Aliases
   - `mv`
   - `mysql`
   - `rm`
-  - `scp`
 
 ### Disabled File Globbing
 
   - `fc`
   - `find`
+  - `ftp`
   - `history`
   - `locate`
   - `rake`
+  - `rsync`
+  - `scp`
+  - `sftp`
 
 ### General
 
@@ -136,6 +139,11 @@ Functions
 ### Resource usage
 
   - `psu` displays user owned processes status.
+
+### Search and Replace
+
+  - `prep` provides a grep-like pattern search.
+  - `psub` provides a sed-like pattern substitution.
 
 Authors
 -------

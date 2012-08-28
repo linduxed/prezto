@@ -8,7 +8,7 @@
 # Get the prefix or use the default.
 zstyle -s ':omz:module:gnu-utility' prefix '_gnu_utility_p' || _gnu_utility_p='g'
 
-# Check for the presence of GNU Core Utilities.
+# Return if requirements are not found.
 if (( ! ${+commands[${_gnu_utility_p}whoami]} )); then
   return 1
 fi
@@ -29,7 +29,7 @@ _gnu_utility_cmds=(
   'tty' 'uname' 'unexpand' 'uniq' 'unlink' 'uptime' 'users' 'vdir'
   'wc' 'who' 'whoami' 'yes'
 
-  # The following are not part of Coreutils but installed separately.
+  # The following utilities are not part of Coreutils but installed separately.
 
   # Binutils
   'addr2line' 'ar' 'c++filt' 'elfedit' 'nm' 'objcopy' 'objdump'

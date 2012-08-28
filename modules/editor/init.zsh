@@ -24,13 +24,13 @@
 #
 #     zstyle ':omz:module:editor:keymap:primary' insert 'I'
 #
-#   To indicate when the editor is in the primary keymap (emacs or viins) overwrite
-#   mode, add the following to your theme prompt setup function.
+#   To indicate when the editor is in the primary keymap (emacs or viins)
+#   overwrite mode, add the following to your theme prompt setup function.
 #
 #     zstyle ':omz:module:editor:keymap:primary' overwrite 'O'
 #
-#   To indicate when the editor is in the alternate keymap (vicmd), add the following
-#   to your theme prompt setup function.
+#   To indicate when the editor is in the alternate keymap (vicmd), add the
+#   following to your theme prompt setup function.
 #
 #     zstyle ':omz:module:editor:keymap' alternate '<<<'
 #
@@ -40,10 +40,14 @@
 #     zstyle ':omz:module:editor' completing '...'
 #
 
-# Dumb terminals lack support.
+# Return if requirements are not found.
 if [[ "$TERM" == 'dumb' ]]; then
   return 1
 fi
+
+#
+# Options
+#
 
 # Beep on error in line editor.
 setopt BEEP
@@ -51,6 +55,10 @@ setopt BEEP
 # Allow command line editing in an external editor.
 autoload -Uz edit-command-line
 zle -N edit-command-line
+
+#
+# Variables
+#
 
 # Use human-friendly identifiers.
 zmodload zsh/terminfo
@@ -93,6 +101,10 @@ for key in "$key_info[@]"; do
   fi
 done
 
+#
+# Functions
+#
+
 # Displays editor information.
 function editor-info {
   # Clean up previous $editor_info.
@@ -122,8 +134,23 @@ function editor-info {
 }
 zle -N editor-info
 
-# Updates editor information when the keymap changes.
+# Ensures that $terminfo values are valid and updates editor information when
+# the keymap changes.
 function zle-keymap-select zle-line-init zle-line-finish {
+  # The terminal must be in application mode when ZLE is active for $terminfo
+  # values to be valid.
+  case "$0" in
+    (zle-line-init)
+      # Enable terminal application mode.
+      echoti smkx
+    ;;
+    (zle-line-finish)
+      # Disable terminal application mode.
+      echoti rmkx
+    ;;
+  esac
+
+  # Update editor information.
   zle editor-info
 }
 zle -N zle-keymap-select
@@ -191,7 +218,10 @@ zle -N prepend-sudo
 # Reset to default key bindings.
 bindkey -d
 
-# Emacs key bindings.
+#
+# Emacs Key Bindings
+#
+
 for key ("$key_info[Escape]"{B,b}) bindkey -M emacs "$key" emacs-backward-word
 for key ("$key_info[Escape]"{F,f}) bindkey -M emacs "$key" emacs-forward-word
 bindkey -M emacs "$key_info[Escape]$key_info[Left]" emacs-backward-word
@@ -220,7 +250,9 @@ if (( $+widgets[history-incremental-pattern-search-backward] )); then
     history-incremental-pattern-search-forward
 fi
 
-# Vi key bindings.
+#
+# Vi Key Bindings
+#
 
 # Edit command in an external editor.
 bindkey -M vicmd "v" edit-command-line
@@ -241,7 +273,10 @@ else
   bindkey -M vicmd "/" history-incremental-search-forward
 fi
 
-# Emacs and Vi key bindings.
+#
+# Emacs and Vi Key Bindings
+#
+
 for keymap in 'emacs' 'viins'; do
   bindkey -M "$keymap" "$key_info[Home]" beginning-of-line
   bindkey -M "$keymap" "$key_info[End]" end-of-line
@@ -294,6 +329,10 @@ done
 if zstyle -t ':omz:module:editor' dot-expansion; then
   bindkey -M isearch . self-insert 2> /dev/null
 fi
+
+#
+# Layout
+#
 
 # Set the key layout.
 zstyle -s ':omz:module:editor' keymap 'keymap'

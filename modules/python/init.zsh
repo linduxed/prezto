@@ -6,6 +6,11 @@
 #   Sebastian Wiesner <lunaryorn@googlemail.com>
 #
 
+# Return if requirements are not found.
+if (( ! $+commands[python] )); then
+  return 1
+fi
+
 # Prepend PEP 370 per user site packages directory, which defaults to
 # ~/Library/Python on Mac OS X and ~/.local elsewhere, to PATH/MANPATH.
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -22,3 +27,8 @@ if [[ -n "$WORKON_HOME" ]] && (( $+commands[virtualenvwrapper.sh] )); then
   source "$commands[virtualenvwrapper.sh]"
 fi
 
+#
+# Aliases
+#
+
+alias py='python'
