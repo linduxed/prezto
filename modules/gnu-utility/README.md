@@ -17,10 +17,10 @@ Settings
 
 ### Prefix
 
-To use a different prefix, add the following to *zshrc*, and replace 'g' with
+To use a different prefix, add the following to *zpreztorc*, and replace 'g' with
 the desired prefix:
 
-    zstyle ':omz:module:gnu-utility' prefix 'g'
+    zstyle ':prezto:module:gnu-utility' prefix 'g'
 
 Authors
 -------
@@ -29,5 +29,5 @@ Authors
 
   - [Sorin Ionescu](https://github.com/sorin-ionescu)
 
-[1]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[1]: https://github.com/sorin-ionescu/prezto/issues
 

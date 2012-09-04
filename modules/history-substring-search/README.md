@@ -1,7 +1,7 @@
 History Substring Search
 ========================
 
-Integrates [zsh-history-substring-search][1] into Oh My Zsh, which implements
+Integrates [zsh-history-substring-search][1] into Prezto, which implements
 the [Fish shell][2]'s history search feature, where the user can type in any
 part of a previously entered command and press up and down to cycle through
 matching commands.
@@ -22,18 +22,19 @@ Settings
 ### Case Sensitivity
 
 To enable case-sensitivity for this module only, add the following line to
-*zshrc*:
+*zpreztorc*:
 
-    zstyle ':omz:module:history-substring-search' case-sensitive 'yes'
+    zstyle ':prezto:module:history-substring-search' case-sensitive 'yes'
 
 ### Highlighting
 
 If colors are enabled, *history-substring-search* will automatically highlight
 positive results.
 
-To enable highlighting for this module only, add the following line to *zshrc*:
+To enable highlighting for this module only, add the following line to
+*zpreztorc*:
 
-    zstyle ':omz:module:history-substring-search' color 'yes'
+    zstyle ':prezto:module:history-substring-search' color 'yes'
 
 Authors
 -------
@@ -45,5 +46,5 @@ Authors
 
 [1]: https://github.com/zsh-users/zsh-history-substring-search
 [2]: http://fishshell.com
-[3]: https://github.com/sorin-ionescu/oh-my-zsh/issues
+[3]: https://github.com/sorin-ionescu/prezto/issues
 
