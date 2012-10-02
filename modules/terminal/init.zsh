@@ -48,7 +48,7 @@ function set-titles-with-command {
   fi
 
   emulate -L zsh
-  setopt LOCAL_OPTIONS EXTENDED_GLOB
+  setopt EXTENDED_GLOB
 
   # Get the command name that is under job control.
   if [[ "${1[(w)1]}" == (fg|%*)(\;|) ]]; then
@@ -68,6 +68,7 @@ function set-titles-with-command {
     # Set the command name, or in the case of sudo or ssh, the next command.
     local cmd=${${1[(wr)^(*=*|sudo|ssh|-*)]}:t}
     local truncated_cmd="${cmd/(#m)?(#c15,)/${MATCH[1,12]}...}"
+    unset MATCH
 
     if [[ "$TERM" == screen* ]]; then
       set-screen-window-title "$truncated_cmd"
@@ -80,6 +81,9 @@ function set-titles-with-command {
 
 # Sets the tab and window titles with a given path.
 function set-titles-with-path {
+  emulate -L zsh
+  setopt EXTENDED_GLOB
+
   local absolute_path="${${1:a}:-$PWD}"
 
   if [[ "$TERM_PROGRAM" == 'Apple_Terminal' ]]; then
@@ -87,6 +91,7 @@ function set-titles-with-path {
   else
     local abbreviated_path="${absolute_path/#$HOME/~}"
     local truncated_path="${abbreviated_path/(#m)?(#c15,)/...${MATCH[-12,-1]}}"
+    unset MATCH
 
     if [[ "$TERM" == screen* ]]; then
       set-screen-window-title "$truncated_path"
