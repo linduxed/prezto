@@ -4,71 +4,20 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-# Usage:
-#   Define the following styles in a prompt theme setup function.
-#
-#     # %s - Special action name (am, merge, rebase).
-#     zstyle ':prezto:module:git' action 'action:%s'
-#
-#     # %a - Indicator to notify of added files.
-#     zstyle ':prezto:module:git' added 'added:%a'
-#
-#     # %A - Indicator to notify of ahead branch.
-#     zstyle ':prezto:module:git' ahead 'ahead:%A'
-#
-#     # %B - Indicator to notify of behind branch.
-#     zstyle ':prezto:module:git' behind 'behind:%B'
-#
-#     # %b - Branch name.
-#     zstyle ':prezto:module:git' branch 'branch:%b'
-#
-#     # %C - Indicator to notify of a clean working directory.
-#     zstyle ':prezto:module:git' clean 'clean'
-#
-#     # %c - SHA-1 hash.
-#     zstyle ':prezto:module:git' commit 'commit:%c'
-#
-#     # %d - Indicator to notify of deleted files.
-#     zstyle ':prezto:module:git' deleted 'deleted:%d'
-#
-#     # %D - Indicator to notify of dirty files.
-#     zstyle ':prezto:module:git' dirty 'dirty:%D'
-#
-#     # %m - Indicator to notify of modified files.
-#     zstyle ':prezto:module:git' modified 'modified:%m'
-#
-#     # %p - HEAD position in relation to the nearest branch, remote, tag.
-#     zstyle ':prezto:module:git' position 'position:%p'
-#
-#     # %R - Remote name.
-#     zstyle ':prezto:moduleit' remote 'remote:%R'
-#
-#     # %r - Indicator to notify of renamed files.
-#     zstyle ':prezto:module:git' renamed 'renamed:%r'
-#
-#     # %S - Indicator to notify of stashed files.
-#     zstyle ':prezto:module:git' stashed 'stashed:%S'
-#
-#     # %U - Indicator to notify of unmerged files.
-#     zstyle ':prezto:module:git' unmerged 'unmerged:%U'
-#
-#     # %u - Indicator to notify of untracked files.
-#     zstyle ':prezto:module:git' untracked 'untracked:%u'
-#
-#     # Ignore submodule when it is 'dirty', 'untracked', 'all', or 'none'.
-#     zstyle ':prezto:module:git:ignore' submodule ''
-#
-#     # Prompts.
-#     zstyle ':prezto:module:git' info \
-#       'prompt'  ' git:(%b%C%D)' \
-#       'rprompt' ''
-#
 
 # Gets the Git special action (am, bisect, cherry, merge, rebase).
 # Borrowed from vcs_info and edited.
 function _git-action {
   local action_dir
   local git_dir="$(git-dir)"
+  local apply_formatted
+  local bisect_formatted
+  local cherry_pick_formatted
+  local cherry_pick_sequence_formatted
+  local merge_formatted
+  local rebase_formatted
+  local rebase_interactive_formatted
+  local rebase_merge_formatted
 
   for action_dir in \
     "${git_dir}/rebase-apply" \
@@ -76,12 +25,15 @@ function _git-action {
     "${git_dir}/../.dotest"
   do
     if [[ -d "$action_dir" ]] ; then
+      zstyle -s ':prezto:module:git:info:action:apply' format 'apply_formatted' || apply_formatted='apply'
+      zstyle -s ':prezto:module:git:info:action:rebase' format 'rebase_formatted' || rebase_formatted='rebase'
+
       if [[ -f "${action_dir}/rebasing" ]] ; then
-        print 'rebase'
+        print "$rebase_formatted"
       elif [[ -f "${action_dir}/applying" ]] ; then
-        print 'am'
+        print "$apply_formatted"
       else
-        print 'am/rebase'
+        print "${rebase_formatted}/${apply_formatted}"
       fi
 
       return 0
@@ -93,7 +45,8 @@ function _git-action {
     "${git_dir}/.dotest-merge/interactive"
   do
     if [[ -f "$action_dir" ]]; then
-      print 'rebase-i'
+      zstyle -s ':prezto:module:git:info:action:rebase-interactive' format 'rebase_interactive_formatted' || rebase_interactive_formatted='rebase-interactive'
+      print "$rebase_interactive_formatted"
       return 0
     fi
   done
@@ -103,28 +56,33 @@ function _git-action {
     "${git_dir}/.dotest-merge"
   do
     if [[ -d "$action_dir" ]]; then
-      print 'rebase-m'
+      zstyle -s ':prezto:module:git:info:action:rebase-merge' format 'rebase_merge_formatted' || rebase_merge_formatted='rebase-merge'
+      print "$rebase_merge_formatted"
       return 0
     fi
   done
 
   if [[ -f "${git_dir}/MERGE_HEAD" ]]; then
-    print 'merge'
+    zstyle -s ':prezto:module:git:info:action:merge' format 'merge_formatted' || merge_formatted='merge'
+    print "$merge_formatted"
     return 0
   fi
 
   if [[ -f "${git_dir}/CHERRY_PICK_HEAD" ]]; then
     if [[ -d "${git_dir}/sequencer" ]] ; then
-      print 'cherry-seq'
+      zstyle -s ':prezto:module:git:info:action:cherry-pick-sequence' format 'cherry_pick_sequence_formatted' || cherry_pick_sequence_formatted='cherry-pick-sequence'
+      print "$cherry_pick_sequence_formatted"
     else
-      print 'cherry'
+      zstyle -s ':prezto:module:git:info:action:cherry-pick' format 'cherry_pick_formatted' || cherry_pick_formatted='cherry-pick'
+      print "$cherry_pick_formatted"
     fi
 
     return 0
   fi
 
   if [[ -f "${git_dir}/BISECT_LOG" ]]; then
-    print 'bisect'
+    zstyle -s ':prezto:module:git:info:action:bisect' format 'bisect_formatted' || bisect_formatted='bisect'
+    print "$bisect_formatted"
     return 0
   fi
 
@@ -192,7 +150,7 @@ function git-info {
   local dirty=0
   local dirty_format
   local dirty_formatted
-  local ignore_submodule
+  local ignore_submodules
   local -A info_formats
   local info_format
   local line_number=0
@@ -258,29 +216,29 @@ function git-info {
   ahead_and_behind_cmd='git rev-list --count --left-right HEAD...@{upstream}'
 
   # Ignore submodule status.
-  zstyle -s ':prezto:module:git:ignore' submodule 'ignore_submodule'
-  if [[ -n "$ignore_submodule" ]]; then
-    status_cmd+=" --ignore-submodules=${ignore_submodule}"
+  zstyle -s ':prezto:module:git:status:ignore' submodules 'ignore_submodules'
+  if [[ -n "$ignore_submodules" ]]; then
+    status_cmd+=" --ignore-submodules=${ignore_submodules}"
   fi
 
   # Format commit.
   commit="$(git rev-parse HEAD 2> /dev/null)"
   if [[ -n "$commit" ]]; then
-    zstyle -s ':prezto:module:git' commit 'commit_format'
+    zstyle -s ':prezto:module:git:info:commit' format 'commit_format'
     zformat -f commit_formatted "$commit_format" "c:$commit"
   fi
 
   # Format stashed.
   if [[ -f "$(git-dir)/refs/stash" ]]; then
     stashed="$(git stash list 2> /dev/null | wc -l | awk '{print $1}')"
-    zstyle -s ':prezto:module:git' stashed 'stashed_format'
+    zstyle -s ':prezto:module:git:info:stashed' format 'stashed_format'
     zformat -f stashed_formatted "$stashed_format" "S:$stashed"
   fi
 
   # Format action.
   action="$(_git-action)"
   if [[ -n "$action" ]]; then
-    zstyle -s ':prezto:module:git' action 'action_format'
+    zstyle -s ':prezto:module:git:info:action' format 'action_format'
     zformat -f action_formatted "$action_format" "s:$action"
   fi
 
@@ -301,13 +259,13 @@ function git-info {
   # Format branch.
   branch="${$(git symbolic-ref -q HEAD)##refs/heads/}"
   if [[ -n "$branch" ]]; then
-    zstyle -s ':prezto:module:git' branch 'branch_format'
+    zstyle -s ':prezto:module:git:info:branch' format 'branch_format'
     zformat -f branch_formatted "$branch_format" "b:$branch"
 
     # Format remote.
     remote="${$(${(z)remote_cmd} 2> /dev/null)##refs/remotes/}"
     if [[ -n "$remote" ]]; then
-      zstyle -s ':prezto:module:git' remote 'remote_format'
+      zstyle -s ':prezto:module:git:info:remote' format 'remote_format'
       zformat -f remote_formatted "$remote_format" "R:$remote"
 
       # Get ahead and behind counts.
@@ -316,14 +274,14 @@ function git-info {
       # Format ahead.
       ahead="$ahead_and_behind[(w)1]"
       if (( $ahead > 0 )); then
-        zstyle -s ':prezto:module:git' ahead 'ahead_format'
+        zstyle -s ':prezto:module:git:info:ahead' format 'ahead_format'
         zformat -f ahead_formatted "$ahead_format" "A:$ahead"
       fi
 
       # Format behind.
       behind="$ahead_and_behind[(w)2]"
       if (( $behind > 0 )); then
-        zstyle -s ':prezto:module:git' behind 'behind_format'
+        zstyle -s ':prezto:module:git:info:behind' format 'behind_format'
         zformat -f behind_formatted "$behind_format" "B:$behind"
       fi
     fi
@@ -331,57 +289,57 @@ function git-info {
     # Format position.
     position="$(git describe --contains --all HEAD 2> /dev/null)"
     if [[ -n "$position" ]]; then
-      zstyle -s ':prezto:module:git' position 'position_format'
+      zstyle -s ':prezto:module:git:info:position' format 'position_format'
       zformat -f position_formatted "$position_format" "p:$position"
     fi
   fi
 
   # Format added.
   if (( $added > 0 )); then
-    zstyle -s ':prezto:module:git' added 'added_format'
+    zstyle -s ':prezto:module:git:info:added' format 'added_format'
     zformat -f added_formatted "$added_format" "a:$added_format"
   fi
 
   # Format deleted.
   if (( $deleted > 0 )); then
-    zstyle -s ':prezto:module:git' deleted 'deleted_format'
+    zstyle -s ':prezto:module:git:info:deleted' format 'deleted_format'
     zformat -f deleted_formatted "$deleted_format" "d:$deleted_format"
   fi
 
   # Format modified.
   if (( $modified > 0 )); then
-    zstyle -s ':prezto:module:git' modified 'modified_format'
+    zstyle -s ':prezto:module:git:info:modified' format 'modified_format'
     zformat -f modified_formatted "$modified_format" "m:$modified"
   fi
 
   # Format renamed.
   if (( $renamed > 0 )); then
-    zstyle -s ':prezto:module:git' renamed 'renamed_format'
+    zstyle -s ':prezto:module:git:info:renamed' format 'renamed_format'
     zformat -f renamed_formatted "$renamed_format" "r:$renamed"
   fi
 
   # Format unmerged.
   if (( $unmerged > 0 )); then
-    zstyle -s ':prezto:module:git' unmerged 'unmerged_format'
+    zstyle -s ':prezto:module:git:info:unmerged' format 'unmerged_format'
     zformat -f unmerged_formatted "$unmerged_format" "U:$unmerged"
   fi
 
   # Format untracked.
   if (( $untracked > 0 )); then
-    zstyle -s ':prezto:module:git' untracked 'untracked_format'
+    zstyle -s ':prezto:module:git:info:untracked' format 'untracked_format'
     zformat -f untracked_formatted "$untracked_format" "u:$untracked"
   fi
 
   # Format dirty and clean.
   if (( $dirty > 0 )); then
-    zstyle -s ':prezto:module:git' dirty 'dirty_format'
+    zstyle -s ':prezto:module:git:info:dirty' format 'dirty_format'
     zformat -f dirty_formatted "$dirty_format" "D:$dirty"
   else
-    zstyle -s ':prezto:module:git' clean 'clean_formatted'
+    zstyle -s ':prezto:module:git:info:clean' format 'clean_formatted'
   fi
 
   # Format info.
-  zstyle -a ':prezto:module:git' info 'info_formats'
+  zstyle -a ':prezto:module:git:info:keys' format 'info_formats'
   for info_format in ${(k)info_formats}; do
     zformat -f REPLY "$info_formats[$info_format]" \
       "A:$ahead_formatted" \
