@@ -17,11 +17,6 @@ alias unusb2='pumount /dev/sdc1'
 
 alias finished='mplayer ~/.sounds/ngdbell.wav -really-quiet'
 
-alias dotfiles-update='rsync-azcp -Lk freke:dotfiles/ ~ --exclude ".vim/view/"'
-
-# Backup command
-alias backup_extHDD-freke='rsync-azcp /media/sdb1/home/{annat,Bilder,Documents,musik,stuff,video} freke:backup/ --exclude="video/youtubeDL","video/rss-downloads"'
-
 #
 #  KEYCHAIN
 #
