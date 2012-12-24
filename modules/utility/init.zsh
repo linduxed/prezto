@@ -97,6 +97,7 @@ alias lt='ll -tr'        # Lists sorted by date, most recent last.
 alias lc='lt -c'         # Lists sorted by date, most recent last, shows change time.
 alias lu='lt -u'         # Lists sorted by date, most recent last, shows access time.
 alias sl='ls'            # I often screw this up.
+alias s='ls'             # I screw this up more often the the previous one.
 
 alias mc='mc -u'
 alias pull-all='find . -name ".git"  -type d -prune -execdir git pull \;'
