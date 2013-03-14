@@ -23,7 +23,7 @@ alias debc='sudo apt-get clean && sudo apt-get autoclean'
 alias debf='apt-file search --regexp'
 
 # Installs packages from repositories.
-alias debi='sudo apt-get install'
+alias debi='sudo aptitude install'
 
 # Installs packages from files.
 alias debI='sudo dpkg -i'
@@ -32,13 +32,13 @@ alias debI='sudo dpkg -i'
 alias debq='apt-cache show'
 
 # Updates the packages lists.
-alias debu='sudo apt-get update'
+alias debu='sudo aptitude update'
 
 # Upgrades outdated packages.
-alias debU='sudo apt-get update && sudo apt-get dist-upgrade'
+alias debU='sudo aptitude update && sudo aptitude safe-upgrade'
 
 # Removes packages.
-alias debx='sudo apt-get remove'
+alias debx='sudo aptitude remove'
 
 # Removes packages, their configuration, and unneeded dependencies.
 alias debX='sudo apt-get remove --purge && sudo apt-get autoremove --purge'
