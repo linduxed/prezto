@@ -17,6 +17,10 @@ alias unusb2='pumount /dev/sdc1'
 
 alias finished='mplayer ~/.sounds/ngdbell.wav -really-quiet'
 
+
+# Load hub.
+eval "$(hub alias -s)"
+
 #
 #  KEYCHAIN
 #
