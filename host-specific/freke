@@ -4,5 +4,8 @@ else
 	export TERM='xterm-color'
 fi
 
+# Load hub.
+eval "$(hub alias -s)"
+
 keychain id_rsa -q
 . ~/.keychain/`uname -n`-sh
