@@ -46,6 +46,7 @@ alias sftp='noglob sftp'
 alias _='sudo'
 alias b='${(z)BROWSER}'
 alias cp="${aliases[cp]:-cp} -i"
+alias du='du -kh'
 alias e='${(z)VISUAL:-${(z)EDITOR}}'
 alias ln="${aliases[ln]:-ln} -i"
 alias mkdir="${aliases[mkdir]:-mkdir} -p"
@@ -132,11 +133,6 @@ if is-callable 'dfc'; then
   alias df='dfc'
 else
   alias df='df -kh'
-fi
-if is-callable 'cdu'; then
-  alias du='cdu -idh'
-else
-  alias du='du -kh'
 fi
 
 if (( $+commands[htop] )); then
