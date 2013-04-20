@@ -104,6 +104,8 @@ alias mc='mc -u'
 alias pull-all='find . -name ".git"  -type d -prune -execdir git pull \;'
 alias unzip-all='for a in *.zip; do mkdir $a:r; pushd $a:r; unzip ../$a; popd; done'
 alias pb='wgetpaste'
+alias pbh='wgetpaste -l Haskell'
+alias pbr='wgetpaste -l Ruby'
 alias freke='ssh -R 8081:localhost:22 linduxed@freke.linduxed.se'
 
 # Mac OS X Everywhere
