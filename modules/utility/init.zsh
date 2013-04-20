@@ -103,7 +103,7 @@ alias s='ls'             # I screw this up more often the the previous one.
 alias mc='mc -u'
 alias pull-all='find . -name ".git"  -type d -prune -execdir git pull \;'
 alias unzip-all='for a in *.zip; do mkdir $a:r; pushd $a:r; unzip ../$a; popd; done'
-alias pb='wgetpaste -X'
+alias pb='wgetpaste'
 alias freke='ssh -R 8081:localhost:22 linduxed@freke.linduxed.se'
 
 # Mac OS X Everywhere
