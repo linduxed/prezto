@@ -1,7 +1,8 @@
 Git
 ===
 
-Enhances the [Git][1] distributed version control system by providing aliases, functions and by exposing repository status information to prompts.
+Enhances the [Git][1] distributed version control system by providing aliases,
+functions and by exposing repository status information to prompts.
 
 Git **1.7.2** is the [minimum required version][7].
 
@@ -12,7 +13,7 @@ Settings
 
 The format of the [git-log][8] output is configurable via the following style,
 where context is *brief*, *oneline*, and *medium*, which will be passed to the
-`--prety=format:` switch.
+`--pretty=format:` switch.
 
     zstyle ':prezto:module:git:log:context' format ''
 
@@ -38,8 +39,8 @@ Aliases
   - `gbc` creates a new branch.
   - `gbl` lists branches and their commits.
   - `gbL` lists local and remote branches and their commits.
-  - `gbs` lists branches and their commits with ancestery graphs.
-  - `gbS` lists local and remote branches and their commits with ancestery
+  - `gbs` lists branches and their commits with ancestry graphs.
+  - `gbS` lists local and remote branches and their commits with ancestry
     graphs.
   - `gbx` deletes a branch.
   - `gbX` deletes a branch irrespective of its merged status.
@@ -64,6 +65,16 @@ Aliases
   - `gcR` removes the *HEAD* commit.
   - `gcs` displays various types of objects.
   - `gcl` displays lost commits.
+
+### Conflict
+
+  - `gCl` lists unmerged files.
+  - `gCa` adds unmerged file contents to the index.
+  - `gCe` executes merge-tool on all unmerged file.
+  - `gCo` checks out our changes for unmerged paths.
+  - `gCO` checks out our changes for all unmerged paths.
+  - `gCt` checks out their changes for unmerged paths.
+  - `gCT` checks out their changes for all unmerged paths.
 
 ### Data
 
@@ -102,16 +113,6 @@ Aliases
   - `giR` resets the current index interactively.
   - `gix` removes files/directories from the index (recursively).
   - `giX` removes files/directories from the index (recursively and forced).
-
-### Conflict
-
-  - `gCl` lists unmerged files.
-  - `gCa` adds unmerged file contents to the index.
-  - `gCe` executes merge-tool on all unmerged file.
-  - `gCo` checks out our changes for unmerged paths.
-  - `gCO` checks out our changes for all unmerged paths.
-  - `gCt` checks out their changes for unmerged paths.
-  - `gCT` checks out their changes for all unmerged paths.
 
 ### Log
 

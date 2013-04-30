@@ -31,9 +31,6 @@ unsetopt MENU_COMPLETE     # Do not autoselect the first completion entry.
 unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
 unsetopt AUTO_REMOVE_SLASH # Don't remove slashes at the end of directory completions.
 
-# Treat these characters as part of a word.
-WORDCHARS='*?_-.[]~&;!#$%^(){}<>'
-
 #
 # Styles
 #
