@@ -7,7 +7,8 @@
 
 alias t='todo.sh'
 alias ta='todo.sh add'
-alias tap='todo.sh adda'
+alias tap='todo.sh add pri'
+alias tad='todo.sh addx'
 alias tl='todo.sh list'
 alias tlc='todo.sh view context'
 alias tlp='todo.sh view project'
