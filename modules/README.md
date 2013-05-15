@@ -152,6 +152,11 @@ Tmux
 
 Defines tmux aliases and provides for auto launching it at start-up.
 
+todo.sh
+--------
+
+Defines aliases for the todo.sh script.
+
 Utility
 -------
 
