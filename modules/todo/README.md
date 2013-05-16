@@ -14,6 +14,7 @@ Aliases
   - `tap` Adds an item with priority. Requires the [add][2] add-on.
   - `tad` Adds a done item. Requires the [addx][3] add-on.
   - `tl` Lists all your items.
+  - `tla` Lists all items, including done ones.
   - `tlc` Lists all items, grouped by contexts. Requires the [view][4] add-on.
   - `tlp` Lists all items, grouped by projects. Requires the [view][5] add-on.
   - `td` Marks item as done.
