@@ -8,7 +8,7 @@ alias torrents='scp ~/downloads/*.torrent freke:torrents/ && echo && rm ~/downlo
 alias hd-mplayer='mplayer -subfont-text-scale 2 -vo vdpau -vc ffh264vdpau'
 
 alias attana='ssh -C mmuszynski@92.33.15.126'
-alias freke-mosh='mosh linduxed@freke.linduxed.se'
+alias freke-mosh='mosh linduxed@freke'
 
 alias usb='pmount /dev/sdb1'
 alias unusb='pumount /dev/sdb1'
@@ -16,7 +16,6 @@ alias usb2='pmount /dev/sdc1'
 alias unusb2='pumount /dev/sdc1'
 
 alias finished='mplayer ~/.sounds/ngdbell.wav -really-quiet'
-
 
 # Load hub.
 eval "$(hub alias -s)"
