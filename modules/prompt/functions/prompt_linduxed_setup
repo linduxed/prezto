@@ -7,9 +7,23 @@
 # Load dependencies.
 pmodload 'helper'
 
+function sorin_pwd {
+  local pwd="${PWD/#$HOME/~}"
+
+  if [[ "$pwd" == (#m)[/~] ]]; then
+    _sorin_pwd="$MATCH"
+    unset MATCH
+  else
+    _sorin_pwd="${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
+  fi
+}
+
 function prompt_linduxed_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
+
+  # Format PWD.
+  sorin_pwd
 
   # Get Git repository information.
   if (( $+functions[git-info] )); then
@@ -52,7 +66,7 @@ function prompt_linduxed_setup {
 
   # Define prompts.
   PROMPT='%B%n%b%F{cyan}@%f%B%m%b %(!.%B%F{red}#%f%b.%B%F{green}❯%f%b) '
-  RPROMPT='${git_info[rprompt]} %(?::%F{white}[%f%F{red}%?%f%F{white}]%f)${git_info[prompt]}%b[%B%F{cyan}%~%f%b]'
+  RPROMPT='${git_info[rprompt]} %(?::%F{white}[%f%F{red}%?%f%F{white}]%f)${git_info[prompt]}%b[%B%F{cyan}${_sorin_pwd}%f%b]'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
