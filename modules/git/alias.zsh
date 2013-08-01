@@ -79,6 +79,7 @@ alias gf='git fetch'
 alias gfc='git clone'
 alias gfm='git pull'
 alias gfr='git pull --rebase'
+alias gff='git pull --ff-only'
 
 # Grep (g)
 alias gg='git grep'
