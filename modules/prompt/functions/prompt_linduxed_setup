@@ -65,7 +65,7 @@ function prompt_linduxed_setup {
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
   # Define prompts.
-  PROMPT='%B%n%b%F{cyan}@%f%B%m%b %(!.%B%F{red}#%f%b.%B%F{green}❯%f%b) '
+  PROMPT='%B%F{white}%n%f%b%F{cyan}@%f%B%F{white}%m%f%b %(!.%B%F{red}#%f%b.%B%F{green}❯%f%b) '
   RPROMPT='${git_info[rprompt]} %(?::%F{white}[%f%F{red}%?%f%F{white}]%f)${git_info[prompt]}%b[%B%F{cyan}${_sorin_pwd}%f%b]'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
