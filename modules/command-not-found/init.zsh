@@ -6,9 +6,9 @@
 #
 
 # Return if requirements are not found.
-if [[ ! -s '/etc/zsh_command_not_found' ]]; then
+if [[ ! -s '/etc/profile.d/cnf.sh' ]]; then
   return 1
 fi
 
-source '/etc/zsh_command_not_found'
+source '/etc/profile.d/cnf.sh'
 
