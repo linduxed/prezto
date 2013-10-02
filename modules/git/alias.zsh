@@ -40,6 +40,7 @@ alias gbm='git branch -m'
 alias gbM='git branch -M'
 alias gbs='git show-branch'
 alias gbS='git show-branch -a'
+alias gbd='git diff $(git merge-base master $(git rev-parse --abbrev-ref HEAD))..$(git rev-parse --abbrev-ref HEAD)'
 
 # Commit (c)
 alias gc='git commit --verbose'
