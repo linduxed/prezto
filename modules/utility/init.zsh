@@ -149,6 +149,9 @@ fi
 # Serves a directory via HTTP.
 alias http-serve='python -m SimpleHTTPServer'
 
+# Engages the warp core.
+alias warpcore='play -c2 -n synth whitenoise band -n 100 25 band -n 300 100 gain +25'
+
 #
 # Functions
 #
