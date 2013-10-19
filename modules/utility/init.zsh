@@ -137,6 +137,10 @@ else
   alias df='df -kh'
 fi
 
+if is-callable 'pygmentize'; then
+  alias ccat='pygmentize -g -O bg=dark'
+fi
+
 if (( $+commands[htop] )); then
   alias top=htop
 else
