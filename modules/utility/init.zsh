@@ -141,13 +141,6 @@ if is-callable 'pygmentize'; then
   alias ccat='pygmentize -g -O bg=dark'
 fi
 
-if (( $+commands[htop] )); then
-  alias top=htop
-else
-  alias topc='top -o cpu'
-  alias topm='top -o vsize'
-fi
-
 # Miscellaneous
 
 # Serves a directory via HTTP.
