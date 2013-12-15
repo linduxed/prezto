@@ -1,5 +1,0 @@
-if [ -e /usr/share/terminfo/s/screen-256color-bce-s ]; then
-	export TERM='screen-256color-s'
-else
-	export TERM='xterm-color'
-fi
