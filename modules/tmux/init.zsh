@@ -47,5 +47,6 @@ fi
 # Aliases
 #
 
+alias tmux='tmux -2'
 alias tmuxa='tmux attach-session'
 alias tmuxl='tmux list-sessions'
