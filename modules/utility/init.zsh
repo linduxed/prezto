@@ -107,7 +107,6 @@ alias unzip-all='for a in *.zip; do mkdir $a:r; pushd $a:r; unzip ../$a; popd; d
 alias pb='wgetpaste'
 alias pbh='wgetpaste -l Haskell'
 alias pbr='wgetpaste -l Ruby'
-alias freke='ssh -R 8081:localhost:22 linduxed@freke.linduxed.se'
 alias dl='aria2c'
 
 # Mac OS X Everywhere
