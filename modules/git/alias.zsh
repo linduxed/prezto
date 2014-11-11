@@ -40,7 +40,7 @@ alias gbm='git branch -m'
 alias gbM='git branch -M'
 alias gbs='git show-branch'
 alias gbS='git show-branch -a'
-alias gbd='git diff $(git merge-base master HEAD)..HEAD'
+alias gbd='git diff master...HEAD'
 alias gbp='git branch --merged | grep -v "master" | grep -v "\*"| xargs -n 1 git branch -d'
 
 # Commit (c)
