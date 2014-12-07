@@ -11,7 +11,6 @@ Options
   - `PUSHD_IGNORE_DUPS` does not store duplicates in the stack.
   - `PUSHD_SILENT` does not print the directory stack after `pushd` or `popd`.
   - `PUSHD_TO_HOME` pushes to the home directory when no argument is given.
-  - `CDABLE_VARS` changes directory to a path stored in a variable.
   - `AUTO_NAME_DIRS` auto adds variable-stored paths to `~` list.
   - `MULTIOS` writes to multiple descriptors.
   - `EXTENDED_GLOB` uses extended globbing syntax.
