@@ -19,8 +19,6 @@ setopt AUTO_NAME_DIRS       # Auto add variable-stored paths to ~ list.
 setopt MULTIOS              # Write to multiple descriptors.
 setopt EXTENDED_GLOB        # Use extended globbing syntax.
 setopt NUMERIC_GLOB_SORT    # Numeric filenames are sorted numerically.
-unsetopt CLOBBER            # Do not overwrite existing files with > and >>.
-                            # Use >! and >>! to bypass.
 
 #
 # Aliases
