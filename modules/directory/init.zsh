@@ -26,4 +26,3 @@ setopt NUMERIC_GLOB_SORT    # Numeric filenames are sorted numerically.
 
 alias d='dirs -v'
 for index ({1..9}) alias "$index"="cd +${index}"; unset index
-

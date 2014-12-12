@@ -63,10 +63,10 @@ if is-callable 'dircolors'; then
   alias ls='ls --group-directories-first'
 
   if zstyle -t ':prezto:module:utility:ls' color; then
-    if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/dircolors" ]]; then
-      eval "$(dircolors "${ZDOTDIR:-$HOME}/.zprezto/dircolors")"
+    if [[ -s "$HOME/.zprezto/dircolors" ]]; then
+      eval "$(dircolors --sh "$HOME/.zprezto/dircolors")"
     else
-      eval "$(dircolors)"
+      eval "$(dircolors --sh)"
     fi
 
     alias ls="$aliases[ls] --color=auto"
@@ -108,6 +108,14 @@ alias pb='gist -c'
 alias pbh='wgetpaste -l Haskell'
 alias pbr='wgetpaste -l Ruby'
 alias dl='aria2c'
+
+# Grep
+if zstyle -t ':prezto:module:utility:grep' color; then
+  export GREP_COLOR='37;45'           # BSD.
+  export GREP_COLORS="mt=$GREP_COLOR" # GNU.
+
+  alias grep="$aliases[grep] --color=auto"
+fi
 
 # Mac OS X Everywhere
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -188,4 +196,3 @@ function find-exec {
 function psu {
   ps -U "${1:-$USER}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
 }
-
