@@ -20,8 +20,6 @@ alias finished='mplayer ~/.sounds/ngdbell.wav -really-quiet'
 # Load hub.
 eval "$(hub alias -s)"
 
-#
-#  KEYCHAIN
-#
-keychain id_rsa -q
-. ~/.keychain/`uname -n`-sh
+# envoy
+envoy -t ssh-agent
+source <(envoy -p)

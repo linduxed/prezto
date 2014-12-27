@@ -16,8 +16,6 @@ alias unusb2='pumount /dev/sdc1'
 
 alias finished='mplayer ~/.sounds/ngdbell.wav -really-quiet'
 
-#
-#  KEYCHAIN
-#
-keychain id_rsa -q
-. ~/.keychain/`uname -n`-sh
+# envoy
+envoy -t ssh-agent
+source <(envoy -p)

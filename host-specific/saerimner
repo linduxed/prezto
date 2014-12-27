@@ -12,8 +12,6 @@ alias unusb2='pumount /dev/sdc1'
 # Load hub.
 eval "$(hub alias -s)"
 
-#
-#  KEYCHAIN
-#
-keychain id_rsa -q
-. ~/.keychain/`uname -n`-sh
+# envoy
+envoy -t ssh-agent
+source <(envoy -p)
