@@ -146,10 +146,6 @@ else
   alias df='df -kh'
 fi
 
-if is-callable 'pygmentize'; then
-  alias ccat='pygmentize -g -O bg=dark'
-fi
-
 # Miscellaneous
 
 # Serves a directory via HTTP.
@@ -194,5 +190,5 @@ function find-exec {
 
 # Displays user owned processes status.
 function psu {
-  ps -U "${1:-$USER}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
+  ps -U "${1:-$LOGNAME}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
 }
