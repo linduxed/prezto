@@ -101,14 +101,6 @@ alias lu='lt -u'         # Lists sorted by date, most recent last, shows access 
 alias sl='ls'            # I often screw this up.
 alias s='ls'             # I screw this up more often the the previous one.
 
-alias mc='mc -u'
-alias pull-all='find . -name ".git"  -type d -prune -execdir git pull \;'
-alias unzip-all='for a in *.zip; do mkdir $a:r; pushd $a:r; unzip ../$a; popd; done'
-alias pb='gist -c'
-alias pbh='wgetpaste -l Haskell'
-alias pbr='wgetpaste -l Ruby'
-alias dl='aria2c'
-
 # Grep
 if zstyle -t ':prezto:module:utility:grep' color; then
   export GREP_COLOR='37;45'           # BSD.
