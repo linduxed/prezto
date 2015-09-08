@@ -35,7 +35,7 @@ unsetopt AUTO_REMOVE_SLASH # Don't remove slashes at the end of directory comple
 # Styles
 #
 
-# Use caching to make completion for cammands such as dpkg and apt usable.
+# Use caching to make completion for commands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "${ZDOTDIR:-$HOME}/.zcompcache"
 
