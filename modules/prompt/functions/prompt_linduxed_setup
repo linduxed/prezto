@@ -71,7 +71,7 @@ function prompt_sorin_precmd {
   prompt_sorin_pwd
 
   # Define prompts.
-  RPROMPT='${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}%F{7}[%f%B%F{6}${_prompt_sorin_pwd}%f%b%F{7}]%f'
+  RPROMPT='${editor_info[overwrite]}${VIM:+" %B%F{6}V%f%b"}%F{7}[%f%B%F{6}${_prompt_sorin_pwd}%f%b%F{7}]%f'
 
   # Kill the old process of slow commands if it is still running.
   if (( _prompt_sorin_precmd_async_pid > 0 )); then
@@ -122,7 +122,7 @@ function prompt_linduxed_setup {
     'status' '%s%A%B%S%a%d%m%r%U%u$(coalesce "%b" "%p" "%c")'
 
   # Define prompts.
-  PROMPT='${SSH_TTY:+"%B%F{7}%n%f%b%F{6}@%f%B%F{7}%m%f%b "}%F{13}%*%f%(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
+  PROMPT='${SSH_TTY:+"%B%F{7}%n%f%b%F{6}@%f%B%F{7}%m%f%b "}%F{13}%*%f%(!. %B%F{1}#%f%b.)%(?:: %B%F{1}%?%f%b)${editor_info[keymap]} '
   RPROMPT=''
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
