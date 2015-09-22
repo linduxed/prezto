@@ -5,11 +5,6 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-#
-# Settings
-#
-#
-
 # Log
 zstyle -s ':prezto:module:git:log:medium' format '_git_log_medium_format' \
   || _git_log_medium_format='%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(dim white)%ai (%ar)%C(reset)%n%+B'
