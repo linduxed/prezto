@@ -117,6 +117,7 @@ alias gm='git merge'
 alias gmC='git merge --no-commit'
 alias gmf='git merge --ff-only'
 alias gmF='git merge --no-ff'
+alias gml='git merge --no-ff --log=2000'
 alias gma='git merge --abort'
 alias gmt='git mergetool'
 
