@@ -8,7 +8,7 @@ todo.sh to work.
 
 Aliases
 -------
- 
+
   - `t` Main command.
   - `ta` Adds an item to the list
   - `tap` Adds an item with priority. Requires the [add][2] add-on.
