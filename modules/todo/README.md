@@ -21,6 +21,7 @@ Aliases
   - `te` Edit todo.txt file. Requires the [edit][6] add-on.
   - `tb` Browse a link in an item. Requires the [nav][7] add-on.
   - `tp` Sets priority of item.
+  - `tmt` Add a [MIT][8] for today.
 
 Authors
 -------
@@ -34,3 +35,4 @@ Authors
 [5]: https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory#wiki-view
 [6]: https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory#wiki-edit
 [7]: https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory#wiki-nav
+[8]: https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory#mit-most-important-task
