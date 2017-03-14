@@ -22,7 +22,7 @@ Aliases
   - `tb` Browse a link in an item. Requires the [nav][5] add-on.
   - `tp` Sets priority of item.
   - `tmt` Add a [MIT][6] for today.
-  - `tml` List [MITs][6] with PAGER.
+  - `tml` List [MITs][6] with PAGER (optionally providing a context argument).
 
 Authors
 -------

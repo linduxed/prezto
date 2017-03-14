@@ -20,4 +20,6 @@ alias te='todo.sh edit'
 alias tb='todo.sh nav'
 alias tp='todo.sh pri'
 alias tmt='todo.sh mit today'
-alias tml='todo.sh mit | $PAGER'
+tml() {
+    todo.sh mit $1 | $PAGER
+}
