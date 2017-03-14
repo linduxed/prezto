@@ -14,6 +14,7 @@ Aliases
   - `tap` Adds an item with priority. Requires the [adda][2] add-on.
   - `tad` Adds a done item. Requires the [addx][2] add-on.
   - `tl` Lists all your items.
+  - `tlf` Pipes all items into [`fzf`][7].
   - `tla` Lists all items, including done ones.
   - `tlc` Lists all items, grouped by contexts. Requires the [view][3] add-on.
   - `tlp` Lists all items, grouped by projects. Requires the [view][3] add-on.
@@ -35,3 +36,4 @@ Authors
 [4]: https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory#edit-open-in-text-editor
 [5]: https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory#nav-open-items-url-in-browser
 [6]: https://github.com/ginatrapani/todo.txt-cli/wiki/Todo.sh-Add-on-Directory#mit-most-important-task
+[7]: https://github.com/junegunn/fzf
