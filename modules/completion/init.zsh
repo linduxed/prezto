@@ -14,9 +14,6 @@ fi
 # Add zsh-completions to $fpath.
 fpath=("${0:h}/external/src" $fpath)
 
-# Load and initialize the completion system ignoring insecure directories.
-autoload -Uz compinit && compinit -i
-
 #
 # Options
 #
@@ -27,9 +24,21 @@ setopt PATH_DIRS           # Perform path search even on command names with slas
 setopt AUTO_PARAM_SLASH    # If completed parameter is a directory, add a trailing slash.
 setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
 unsetopt AUTO_MENU         # Show completion menu on a succesive tab press.
+setopt EXTENDED_GLOB       # Needed for file modification glob modifiers with compinit
 unsetopt MENU_COMPLETE     # Do not autoselect the first completion entry.
 unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
 unsetopt AUTO_REMOVE_SLASH # Don't remove slashes at the end of directory completions.
+
+# Load and initialize the completion system ignoring insecure directories with a
+# cache time of 20 hours, so it should almost always regenerate the first time a
+# shell is opened each day.
+autoload -Uz compinit
+compfiles=(${ZDOTDIR:-$HOME}/.zcompdump(Nm-20))
+if [[ $#compfiles > 0 ]]; then
+  compinit -i -C
+else
+  compinit -i
+fi
 
 #
 # Styles
@@ -67,8 +76,9 @@ zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 
-# Increase the number of errors based on the length of the typed word.
-zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
+# Increase the number of errors based on the length of the typed word. But make
+# sure to cap (at 7) the max-errors to avoid hanging.
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
 
 # Don't complete unavailable commands.
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'

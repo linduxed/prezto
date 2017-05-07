@@ -47,7 +47,7 @@ alias sftp='noglob sftp'
 alias _='sudo'
 alias b='${(z)BROWSER}'
 alias cp="${aliases[cp]:-cp} -i"
-alias du='du -kh'
+alias diffu="diff --unified"
 alias e='${(z)VISUAL:-${(z)EDITOR}}'
 alias ln="${aliases[ln]:-ln} -i"
 alias mkdir="${aliases[mkdir]:-mkdir} -p"
@@ -131,17 +131,21 @@ fi
 alias pbc='pbcopy'
 alias pbp='pbpaste'
 
-# Coloured versions of commands (if available)
-if is-callable 'dfc'; then
-  alias df='dfc'
-else
-  alias df='df -kh'
+# File Download
+if (( $+commands[curl] )); then
+  alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
+elif (( $+commands[wget] )); then
+  alias get='wget --continue --progress=bar --timestamping'
 fi
 
 # Miscellaneous
 
 # Serves a directory via HTTP.
-alias http-serve='python -m SimpleHTTPServer'
+if (( $+commands[python3] )); then
+  alias http-serve='python3 -m http.server'
+else
+  alias http-serve='python -m SimpleHTTPServer'
+fi
 
 # Engages the warp core.
 alias warpcore='play -c2 -n synth whitenoise band -n 100 25 band -n 300 100 gain +25'
