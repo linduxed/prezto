@@ -83,6 +83,7 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gfa='git fetch --all'
   alias gfc='git clone'
   alias gfm='git pull'
+  alias gff='git pull --ff-only'
   alias gfr='git pull --rebase'
 
   # Flow (F)
