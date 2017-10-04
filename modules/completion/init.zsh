@@ -23,7 +23,7 @@ setopt ALWAYS_TO_END       # Move cursor to the end of a completed word.
 setopt PATH_DIRS           # Perform path search even on command names with slashes.
 setopt AUTO_PARAM_SLASH    # If completed parameter is a directory, add a trailing slash.
 setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
-unsetopt AUTO_MENU         # Show completion menu on a succesive tab press.
+setopt AUTO_MENU           # Show completion menu on a succesive tab press.
 setopt EXTENDED_GLOB       # Needed for file modification glob modifiers with compinit
 unsetopt MENU_COMPLETE     # Do not autoselect the first completion entry.
 unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
