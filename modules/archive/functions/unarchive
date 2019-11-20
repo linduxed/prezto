@@ -83,7 +83,7 @@ while (( $# > 0 )); do
       && unrar x -ad "$1" ) \
       || ( (( $+commands[rar] )) \
       && rar x -ad "$1" ) \
-      || unar -d "$1" ;;
+      || unrar -d "$1" ;;
     (*.7z) 7za x "$1" ;;
     (*.deb)
       mkdir -p "$extract_dir/control"
