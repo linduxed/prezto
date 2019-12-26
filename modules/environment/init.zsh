@@ -37,6 +37,9 @@ setopt COMBINING_CHARS    # Combine zero-length punctuation characters (accents)
                           # with the base character.
 unsetopt MAIL_WARNING     # Don't print a warning message if a mail file has been accessed.
 
+# Allow mapping Ctrl+S and Ctrl+Q shortcuts
+(( $+commands[stty] )) && stty -ixon
+
 #
 # Jobs
 #
