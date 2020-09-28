@@ -95,7 +95,9 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gfcr='git clone --recurse-submodules'
   alias gfm='git pull'
   alias gff='git pull --ff-only'
+  alias gfma='git pull --autostash'
   alias gfr='git pull --rebase'
+  alias gfra='git pull --rebase --autostash'
 
   # Flow (F)
   alias gFi='git flow init'
@@ -185,8 +187,8 @@ if ! zstyle -t ':prezto:module:git:alias' skip 'yes'; then
   alias gl='git log --topo-order --pretty=format:"${_git_log_medium_format}"'
   alias gls='git log --topo-order --stat --pretty=format:"${_git_log_medium_format}"'
   alias gld='git log --topo-order --stat --patch --full-diff --pretty=format:"${_git_log_medium_format}"'
-  alias glo='git log --topo-order --pretty=tformat:"${_git_log_oneline_format}"'
-  alias glg='git log --topo-order --all --graph --pretty=format:"${_git_log_oneline_format}"'
+  alias glo='git log --topo-order --pretty=format:"${_git_log_oneline_format}"'
+  alias glg='git log --topo-order --graph --pretty=format:"${_git_log_oneline_format}"'
   alias glgb='git log --topo-order --all --graph --pretty=format:${_git_log_brief_format}'
   alias glb='git log --topo-order --pretty=format:"${_git_log_brief_format}"'
   alias glc='git shortlog --summary --numbered'
