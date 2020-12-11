@@ -57,10 +57,10 @@ unsetopt CHECK_JOBS       # Don't report on jobs when shell exit.
 
 if zstyle -t ':prezto:environment:termcap' color; then
   export LESS_TERMCAP_mb=$'\E[01;31m'       # Begins blinking.
-  export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # Begins bold.
+  export LESS_TERMCAP_md=$'\E[01;38;1;74m'  # Begins bold.
   export LESS_TERMCAP_me=$'\E[0m'           # Ends mode.
   export LESS_TERMCAP_se=$'\E[0m'           # Ends standout-mode.
-  export LESS_TERMCAP_so=$'\E[38;5;246m'    # Begins standout-mode.
+  export LESS_TERMCAP_so=$'\E[38;1;246m'    # Begins standout-mode.
   export LESS_TERMCAP_ue=$'\E[0m'           # Ends underline.
-  export LESS_TERMCAP_us=$'\E[04;32;5;146m' # Begins underline.
+  export LESS_TERMCAP_us=$'\E[04;32;1;146m' # Begins underline.
 fi
